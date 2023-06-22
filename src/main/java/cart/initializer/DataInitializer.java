@@ -6,11 +6,9 @@ import cart.domain.Product;
 import cart.repository.CartItemRepository;
 import cart.repository.MemberRepository;
 import cart.repository.ProductRepository;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 
-import javax.annotation.PostConstruct;
-
-@Component
 public class DataInitializer {
     private static final int JOIN_EVENT_POINT = 5000;
     private final ProductRepository productRepository;
@@ -25,7 +23,7 @@ public class DataInitializer {
         this.cartItemRepository = cartItemRepository;
     }
 
-    @PostConstruct
+    @EventListener(ApplicationReadyEvent.class)
     public void init() {
         final Long 깃짱 = productRepository.createProduct(new Product("깃짱", 13000, "https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81oHOa1sliugOaQaRcinBq9LyWbwL8X1_jFn_WhgE6K9RaHyeb7UUHQaW8APSDVuF3oafXcf-TEGpTNLks_BK2nyI6EtRQ=w1470-h1546"));
         final Long 제리 = productRepository.createProduct(new Product("제리", 13000, "https://lh3.googleusercontent.com/u/0/drive-viewer/AFGJ81qOHC6fmRBVgeBwdwqxQUV4nrhF4U-kfihqaGbtrYwrUTXvaxCC0bRnOoQiAjhPGpztqnyNqX3ZmWI_CFMszdLwMGwiOg=w1470-h1546"));
